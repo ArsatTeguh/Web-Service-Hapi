@@ -1,0 +1,26 @@
+{
+  "name": "Web-Service-Hapi",
+  "version": "1.0.0",
+  "description": "",
+  "main": "Server-Hapi.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon ./src/Server-Hapi.js",
+    "lint": "eslint ./src/Server-Hapi.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@hapi/hapi": "^20.2.1",
+    "cors": "^2.8.5",
+    "express": "^4.17.3",
+    "nanoid": "^3.3.1",
+    "nodemon": "^2.0.15"
+  },
+  "devDependencies": {
+    "eslint": "^8.12.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.25.4"
+  }
+}
