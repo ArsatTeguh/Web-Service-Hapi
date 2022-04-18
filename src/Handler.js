@@ -24,8 +24,8 @@ const addNoteHandler = (req, h) => {
 
   if (isSuccess) {
     const response = h.response({
-      status: 'succsess',
-      message: 'catatan berhasil ditambahkan',
+      status: 'success',
+      message: 'Catatan berhasil ditambahkan',
       data: {
         noteId: id,
       },
@@ -43,7 +43,7 @@ const addNoteHandler = (req, h) => {
 };
 
 const getAllNotesHandler = (req, h) => ({
-  status: 'suscces',
+  status: 'success',
   data: {
     notes,
   },
@@ -57,7 +57,7 @@ const getNoteByIdHandler = (req, h) => {
   if (note !== undefined) {
     console.log(note);
     return {
-      status: 'succsess',
+      status: 'success',
       data: {
         note,
       },
@@ -92,8 +92,8 @@ const editNoteByIdHendler = (req, h) => {
     };
 
     const response = h.response({
-      status: 'succsess',
-      message: 'Catatan Berhasil Ditambahkan',
+      status: 'success',
+      message: 'Catatan berhasil diperbarui',
     });
     response.code(200);
     return response;
@@ -113,8 +113,8 @@ const deleteNoteByIdHandler = (req, h) => {
   if (index !== -1) {
     notes.splice(index, 1);
     const response = h.response({
-      status: 'succsess',
-      message: 'Data Berhasil Dihapus',
+      status: 'success',
+      message: 'Catatan berhasil dihapus',
     });
     response.code(200);
     return response;

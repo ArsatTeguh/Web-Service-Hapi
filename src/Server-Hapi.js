@@ -1,20 +1,25 @@
 const Hapi = require('@hapi/hapi');
-const routes = require('./Route');
+const NotesService = require('./Services/Postgres/NotesService');
+const notes = require('./Api/Notes');
+const NotesValidator = require('./Validator');
+require('dotenv').config();
 
 const init = async () => {
+  const notesService = new NotesService();
   const server = Hapi.server({
-    host: process.env.NODE_ENV !== 'production' ? 'localhost' : '0.0.0.0',
-    port: 5000,
-    routes: {
-      cors: {
-        origin: ['*'],
-        headers: ['Accept', ' Authorization', 'Content-Type', 'If-None-Match', 'Accept-language'],
-      },
+    host: process.env.HOST,
+    port: process.env.PORT,
+    routes: true,
+  });
+
+  await server.register({
+    plugin: notes,
+    options: {
+      service: notesService,
+      validator: NotesValidator,
     },
   });
-  server.route(routes);
   await server.start();
-
-  console.log(`Server berjalan pada ${server.info.uri}`);
+  console.log(`Server Berjalan Di Port ${server.info.uri}`);
 };
 init();
