@@ -5,11 +5,16 @@ const users = require('./Api/Users');
 const NotesValidator = require('./Validator');
 const UsersValidator = require('./Validator/users/index');
 const UserService = require('./Services/Postgres/UserService');
+const authentications = require('./Api/Authentication');
+const AuthenticationsValidator = require('./Validator/Authentication/index');
+const AuthenticationsService = require('./Services/Postgres/AuthenticationServer');
+const TokenManager = require('./Tokenize/TokenManeger');
 require('dotenv').config();
 
 const init = async () => {
   const usersService = new UserService();
   const notesService = new NotesService();
+  const authenticationsService = new AuthenticationsService();
   const server = Hapi.server({
     host: process.env.HOST,
     port: process.env.PORT,
@@ -30,7 +35,18 @@ const init = async () => {
       service: usersService,
       validator: UsersValidator,
     },
-  }]);
+
+  },
+  {
+    plugin: authentications,
+    options: {
+      authenticationsService,
+      usersService,
+      tokenManager: TokenManager,
+      validator: AuthenticationsValidator,
+    },
+  },
+  ]);
 
   await server.start();
   console.log(`Server Berjalan Di Port ${server.info.uri}`);
